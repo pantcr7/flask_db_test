@@ -1,0 +1,5 @@
+Flask
+Flask-SQLAlchemy
+sqlite-web
+python-dotenv
+pytz

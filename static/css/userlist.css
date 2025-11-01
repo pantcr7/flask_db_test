@@ -1,0 +1,11 @@
+body {
+      background: linear-gradient(135deg, #f9fafb 0%, #eef2f7 100%);
+      font-family: 'Inter', sans-serif;
+    }
+    .card {
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 15px rgba(0,0,0,0.08);
+    }
