@@ -1,2 +1,3 @@
 python -m sqlite_web "test.db"
 python3 app.py
+pip freeze > requirements.txt

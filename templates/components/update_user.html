@@ -1,0 +1,34 @@
+<div id="updateUserModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+  <div class="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative">
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Update User</h2>
+
+    <!-- Feedback Messages -->
+    <div id="updateFormMessage" class="hidden p-3 mb-4 rounded-lg text-sm"></div>
+
+    <form id="updateUserForm" method="POST">
+      <input type="hidden" name="id">
+
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-1">Username <span class="text-red-500">*</span></label>
+        <input type="text" name="username" class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-200" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
+        <input type="email" name="email" class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-200" required>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-1">Content</label>
+        <textarea name="content" class="w-full border rounded-lg p-2 focus:ring focus:ring-blue-200"></textarea>
+      </div>
+
+      <div class="flex justify-end gap-2">
+        <button type="button" id="cancelUpdateBtn" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Update</button>
+      </div>
+    </form>
+
+    <button id="closeUpdateModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-xl">&times;</button>
+  </div>
+</div>

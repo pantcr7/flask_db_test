@@ -81,6 +81,46 @@ def userlist():
         return render_template('userlist.html', userlist=userlist)
 
 
+@app.route('/delete_user/<int:user_id>', methods=['POST'])
+def delete_user(user_id):
+    """Delete a user by ID."""
+    user = User.query.get_or_404(user_id)
+    try:
+        db.session.delete(user)
+        db.session.commit()
+        return redirect(url_for('userlist'))
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 400
+
+
+@app.route('/update_user/<int:user_id>', methods=['GET', 'POST'])
+def update_user(user_id):
+    """Update user details. Handles both GET (show form) and POST (process update)."""
+    user = User.query.get_or_404(user_id)
+
+    if request.method == 'POST':
+        data = request.get_json(silent=True) or request.form
+        
+        # Update user fields if provided in request
+        if data.get('username'):
+            user.username = data['username']
+        if data.get('email'):
+            user.email = data['email']
+        user.content = data.get('content', user.content)
+
+        try:
+            db.session.commit()
+            # Return refreshed table HTML for AJAX requests
+            users = User.query.order_by(User.created_at.asc()).all()
+            table_html = render_template('components/_userlist_table.html', userlist=users)
+            return jsonify({"table_html": table_html, "message": "User updated successfully"})
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({"error": str(e)}), 400
+    else:
+        # GET request - return the modal template with user data
+        return render_template('components/update_user.html', user=user)
 # -------------------- MAIN --------------------
 if __name__ == '__main__':
     with app.app_context():
