@@ -125,4 +125,4 @@ def update_user(user_id):
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()  # Ensure tables exist before running
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True)
